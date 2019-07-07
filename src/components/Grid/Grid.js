@@ -27,7 +27,8 @@ Grid.propTypes = {
       h: PropTypes.number.isRequired,
       static: PropTypes.bool,
       minW: PropTypes.number,
-      maxW: PropTypes.number
+      maxW: PropTypes.number,
+      isResizable: PropTypes.bool
     })
   ).isRequired
 };

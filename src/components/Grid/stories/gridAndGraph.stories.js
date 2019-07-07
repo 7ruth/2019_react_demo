@@ -12,10 +12,10 @@ import Grid from '../Grid';
  */
 function GridAndGraph() {
   const layout = [
-    { i: 'a', x: 0, y: 0, w: 4, h: 4, static: false },
-    { i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
-    { i: 'c', x: 4, y: 0, w: 1, h: 2 },
-    { i: 'j', x: 4, y: 0, w: 4, h: 2 }
+    { i: 'a', x: 0, y: 0, w: 4, h: 4, isResizable: false },
+    { i: 'b', x: 0, y: 4, w: 4, h: 4, isResizable: false },
+    { i: 'c', x: 0, y: 8, w: 4, h: 4, isResizable: false },
+    { i: 'j', x: 0, y: 12, w: 4, h: 4, isResizable: false }
   ];
 
   const data = [
@@ -34,11 +34,17 @@ function GridAndGraph() {
   return (
     <Grid layout={layout}>
       <div key="a">
-        <Graph data={data} height={300} width={400} />;
+        <Graph data={data} height={200} width={300} />
       </div>
-      <div key="b">b</div>
-      <div key="c">c</div>
-      <div key="j">J</div>
+      <div key="b">
+        <Graph data={data} height={200} width={300} />
+      </div>
+      <div key="c">
+        <Graph data={data} height={200} width={300} />
+      </div>
+      <div key="j">
+        <Graph data={data} height={200} width={300} />
+      </div>
     </Grid>
   );
 }
