@@ -13,8 +13,8 @@ const {
     removeModuleScopePlugin
   } = require("customize-cra");
 
-  const path = require("path");
-  
+const path = require("path");
+
 module.exports = override(
     disableEsLint(),
     removeModuleScopePlugin(),

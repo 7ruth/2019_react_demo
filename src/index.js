@@ -39,6 +39,9 @@ import LanguageProvider from 'containers/LanguageProvider';
 // import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 // import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
 
+// import '/node_modules/react-grid-layout/css/styles.css'
+// import '/node_modules/react-resizable/css/styles.css'
+
 import configureStore from './configureStore';
 
 // Import i18n messages

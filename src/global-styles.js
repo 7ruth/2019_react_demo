@@ -1,5 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
+import "react-grid-layout/css/styles.css"
+import "react-resizable/css/styles.css"
+
 const GlobalStyle = createGlobalStyle`
   html,
   body {
