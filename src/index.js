@@ -70,7 +70,7 @@ const render = messages => {
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,
-    MOUNT_NODE,
+    MOUNT_NODE
   );
 };
 
@@ -92,8 +92,8 @@ if (!window.Intl) {
     .then(() =>
       Promise.all([
         import('intl/locale-data/jsonp/en.js'),
-        import('intl/locale-data/jsonp/de.js'),
-      ]),
+        import('intl/locale-data/jsonp/de.js')
+      ])
     ) // eslint-disable-line prettier/prettier
     .then(() => render(translationMessages))
     .catch(err => {
