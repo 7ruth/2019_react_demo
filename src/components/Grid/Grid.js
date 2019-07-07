@@ -1,10 +1,8 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import GridLayout from 'react-grid-layout';
 
-export const GridContext = createContext();
-
-export default function Grid({ layout }) {
+export default function Grid({ children, layout }) {
   return (
     <GridLayout
       className="layout"
@@ -13,14 +11,13 @@ export default function Grid({ layout }) {
       rowHeight={30}
       width={1200}
     >
-      <div key="a">a</div>
-      <div key="b">b</div>
-      <div key="c">c</div>
+      {children}
     </GridLayout>
   );
 }
 
 Grid.propTypes = {
+  // children: PropTypes.array,
   layout: PropTypes.arrayOf(
     PropTypes.shape({
       i: PropTypes.string.isRequired,
