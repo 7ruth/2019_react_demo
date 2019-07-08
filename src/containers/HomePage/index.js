@@ -17,18 +17,20 @@ import { useInjectSaga } from 'utils/injectSaga';
 import {
   makeSelectRepos,
   makeSelectLoading,
-  makeSelectError,
+  makeSelectError
 } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
+import Graph from 'components/Graph';
+import Grid from 'components/Grid';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
+import * as appActions from '../App/actions';
+import * as actions from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -41,7 +43,7 @@ export function HomePage({
   error,
   repos,
   onSubmitForm,
-  onChangeUsername,
+  onChangeTickerSymbol
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -54,8 +56,28 @@ export function HomePage({
   const reposListProps = {
     loading,
     error,
-    repos,
+    repos
   };
+
+  const layout = [
+    { i: 'a', x: 0, y: 0, w: 4, h: 4, isResizable: false },
+    { i: 'b', x: 0, y: 4, w: 4, h: 4, isResizable: false },
+    { i: 'c', x: 0, y: 8, w: 4, h: 4, isResizable: false },
+    { i: 'j', x: 0, y: 12, w: 4, h: 4, isResizable: false }
+  ];
+
+  const data = [
+    { x: 0, y: 8 },
+    { x: 1, y: 5 },
+    { x: 2, y: 4 },
+    { x: 3, y: 9 },
+    { x: 4, y: 1 },
+    { x: 5, y: 7 },
+    { x: 6, y: 6 },
+    { x: 7, y: 3 },
+    { x: 8, y: 2 },
+    { x: 9, y: 0 }
+  ];
 
   return (
     <article>
@@ -63,10 +85,42 @@ export function HomePage({
         <title>Home Page</title>
         <meta
           name="description"
-          content="A React.js Boilerplate application homepage"
+          content="Stock price time series benchmarking tool"
         />
       </Helmet>
-      <div>
+      <Form
+        onSubmit={() => {
+          console.log('submit form');
+        }}
+      >
+        <label htmlFor="ticker_symbol">
+          <FormattedMessage {...messages.inputTicker} />
+          <AtPrefix />
+          <Input
+            id="ticker_symbol"
+            type="text"
+            placeholder="MSFT"
+            // value={username}
+            onChange={onChangeTickerSymbol}
+          />
+        </label>
+      </Form>
+      <Grid layout={layout}>
+        <div key="a">
+          <Graph data={data} height={200} width={300} />
+        </div>
+        <div key="b">
+          <Graph data={data} height={200} width={300} />
+        </div>
+        <div key="c">
+          <Graph data={data} height={200} width={300} />
+        </div>
+        <div key="j">
+          <Graph data={data} height={200} width={300} />
+        </div>
+      </Grid>
+
+      {/* <div>
         <CenteredSection>
           <H2>
             <FormattedMessage {...messages.startProjectHeader} />
@@ -96,7 +150,7 @@ export function HomePage({
           </Form>
           <ReposList {...reposListProps} />
         </Section>
-      </div>
+      </div> */}
     </article>
   );
 }
@@ -107,32 +161,33 @@ HomePage.propTypes = {
   repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   onSubmitForm: PropTypes.func,
   username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
+  onChangeTickerSymbol: PropTypes.func
 };
 
 const mapStateToProps = createStructuredSelector({
   repos: makeSelectRepos(),
   username: makeSelectUsername(),
   loading: makeSelectLoading(),
-  error: makeSelectError(),
+  error: makeSelectError()
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
+    onChangeTickerSymbol: evt =>
+      dispatch(actions.setTickerSymbol(evt.target.value)),
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
-    },
+      dispatch(appActions.triggerTicker());
+    }
   };
 }
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 );
 
 export default compose(
   withConnect,
-  memo,
+  memo
 )(HomePage);

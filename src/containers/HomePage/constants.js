@@ -9,4 +9,4 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const CHANGE_USERNAME = 'boilerplate/Home/CHANGE_USERNAME';
+export const SET_TICKER_SYMBOL = '2019_react_demo/Home/SET_TICKER_SYMBOL';

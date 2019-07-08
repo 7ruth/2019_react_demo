@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_USERNAME } from './constants';
+import * as constants from './constants';
 
 /**
  * Changes the input field of the form
@@ -24,9 +24,9 @@ import { CHANGE_USERNAME } from './constants';
  *
  * @return {object} An action object with a type of CHANGE_USERNAME
  */
-export function changeUsername(username) {
+export function setTickerSymbol(ticker_symbol) {
   return {
-    type: CHANGE_USERNAME,
-    username,
+    type: constants.SET_TICKER_SYMBOL,
+    ticker_symbol
   };
 }
