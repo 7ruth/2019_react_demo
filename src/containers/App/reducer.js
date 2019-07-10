@@ -14,11 +14,8 @@ import * as constants from './constants';
 export const initialState = {
   loading: false,
   error: false,
-  tickerData: false,
-  currentUser: false,
-  userData: {
-    repositories: false
-  }
+  tickersData: {},
+  layout: []
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -28,19 +25,13 @@ const appReducer = (state = initialState, action) =>
       case constants.TRIGGER_TICKER:
         draft.loading = true;
         draft.error = false;
-        draft.tickerData = false;
         break;
-
-      // case LOAD_REPOS_SUCCESS:
-      //   draft.userData.repositories = action.repos;
-      //   draft.loading = false;
-      //   draft.currentUser = action.username;
-      //   break;
-
-      // case LOAD_REPOS_ERROR:
-      //   draft.error = action.error;
-      //   draft.loading = false;
-      //   break;
+      case constants.SET_TICKERS_DATA:
+        draft.tickersData = action.tickersData;
+        break;
+      case constants.SET_LAYOUT:
+        draft.layout = action.layout;
+        break;
     }
   });
 

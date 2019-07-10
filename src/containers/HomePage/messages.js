@@ -25,12 +25,8 @@ export default defineMessages({
     id: `${scope}.tryme.message`,
     defaultMessage: 'Show Github repositories by'
   },
-  trymeAtPrefix: {
-    id: `${scope}.tryme.atPrefix`,
-    defaultMessage: '@'
-  },
   inputTicker: {
     id: `${scope}.input.ticker`,
-    defaultMessage: 'Input Ticker'
+    defaultMessage: 'Input Ticker '
   }
 });

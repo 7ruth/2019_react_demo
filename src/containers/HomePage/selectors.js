@@ -10,7 +10,13 @@ const selectHome = state => state.home || initialState;
 const makeSelectUsername = () =>
   createSelector(
     selectHome,
-    homeState => homeState.username,
+    homeState => homeState.username
   );
 
-export { selectHome, makeSelectUsername };
+const makeSelectTickerSymbol = () =>
+  createSelector(
+    selectHome,
+    homeState => homeState.tickerSymbol
+  );
+
+export { selectHome, makeSelectUsername, makeSelectTickerSymbol };

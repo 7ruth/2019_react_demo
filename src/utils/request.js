@@ -1,3 +1,4 @@
+import axios from 'axios';
 /**
  * Parses the JSON returned by a network request
  *
@@ -37,8 +38,18 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export default function request(url, options) {
+function request(url, options) {
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON);
 }
+
+const getWithPromise = (endpoint, body, config) => {
+  axios.get(endpoint, body, config).then(res => {
+    console.log('res');
+    console.log(res);
+    return Promise.resolve(res);
+  });
+};
+
+export { getWithPromise, request };

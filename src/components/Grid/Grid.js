@@ -7,8 +7,8 @@ export default function Grid({ children, layout }) {
     <GridLayout
       className="layout"
       layout={layout}
-      cols={12}
-      rowHeight={30}
+      cols={40}
+      rowHeight={40}
       width={1200}
     >
       {children}

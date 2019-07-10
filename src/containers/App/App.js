@@ -4,45 +4,75 @@
  *
  */
 
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import styled from 'styled-components';
+// Utils
+import React, { useEffect, memo } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import GlobalStyle from 'global-styles';
 
-import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
+// Redux
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
+// Components
+import { Helmet } from 'react-helmet';
+import Wrap from 'containers/App/components/Wrap';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+import HomePage from 'containers/HomePage/Loadable';
+// import Header from 'components/Header';
+// import Footer from 'components/Footer';
+// Local Redux
+import * as actions from './actions';
+import reducer from './reducer';
+// Local Saga
+import saga from './saga';
 
-import GlobalStyle from '../../global-styles';
+const key = 'app';
 
-const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
-  margin: 0 auto;
-  display: flex;
-  min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
-`;
+export function App() {
+  useInjectReducer({ key, reducer });
+  useInjectSaga({ key, saga });
 
-export default function App() {
+  useEffect(() => {
+    console.log('app use effect');
+  }, []);
+
   return (
-    <AppWrapper>
+    <Wrap>
       <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
+        titleTemplate="%s - 2019 React Demo"
+        defaultTitle="2019 React Demo"
       >
-        <meta name="description" content="A React.js Boilerplate application" />
+        <meta name="description" content="A 2019 React Demo" />
       </Helmet>
       {/* <Header /> */}
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
       <GlobalStyle />
-    </AppWrapper>
+    </Wrap>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  // username: makeSelectUsername(),
+});
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    // triggerTicker: () => dispatch(actions.triggerTicker())
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+export default compose(
+  withConnect,
+  memo
+)(App);

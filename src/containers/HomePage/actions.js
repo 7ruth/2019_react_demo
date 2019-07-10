@@ -24,9 +24,9 @@ import * as constants from './constants';
  *
  * @return {object} An action object with a type of CHANGE_USERNAME
  */
-export function setTickerSymbol(ticker_symbol) {
+export function setTickerSymbol(tickerSymbol) {
   return {
     type: constants.SET_TICKER_SYMBOL,
-    ticker_symbol
+    tickerSymbol
   };
 }

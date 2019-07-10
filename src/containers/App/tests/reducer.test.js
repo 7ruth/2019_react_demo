@@ -12,8 +12,8 @@ describe('appReducer', () => {
       error: false,
       currentUser: false,
       userData: {
-        repositories: false,
-      },
+        repositories: false
+      }
     };
   });
 
@@ -22,37 +22,19 @@ describe('appReducer', () => {
     expect(appReducer(undefined, {})).toEqual(expectedResult);
   });
 
-  it('should handle the loadRepos action correctly', () => {
-    const expectedResult = produce(state, draft => {
-      draft.loading = true;
-      draft.error = false;
-      draft.userData.repositories = false;
-    });
+  // it('should handle the loadRepos action correctly', () => {
+  //   const expectedResult = produce(state, draft => {
+  //     draft.loading = true;
+  //     draft.error = false;
+  //     draft.userData.repositories = false;
+  //   });
 
-    expect(appReducer(state, loadRepos())).toEqual(expectedResult);
-  });
-
-  it('should handle the reposLoaded action correctly', () => {
-    const fixture = [
-      {
-        name: 'My Repo',
-      },
-    ];
-    const username = 'test';
-    const expectedResult = produce(state, draft => {
-      draft.userData.repositories = fixture;
-      draft.loading = false;
-      draft.currentUser = username;
-    });
-
-    expect(appReducer(state, reposLoaded(fixture, username))).toEqual(
-      expectedResult,
-    );
-  });
+  //   expect(appReducer(state, loadRepos())).toEqual(expectedResult);
+  // });
 
   it('should handle the repoLoadingError action correctly', () => {
     const fixture = {
-      msg: 'Not found',
+      msg: 'Not found'
     };
     const expectedResult = produce(state, draft => {
       draft.error = fixture;
@@ -60,7 +42,7 @@ describe('appReducer', () => {
     });
 
     expect(appReducer(state, repoLoadingError(fixture))).toEqual(
-      expectedResult,
+      expectedResult
     );
   });
 });
